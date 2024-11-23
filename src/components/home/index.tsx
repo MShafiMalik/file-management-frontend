@@ -1,4 +1,4 @@
-import { Box, Grid2 } from "@mui/material";
+import { Box, Grid2, Typography } from "@mui/material";
 import MediaCard from "./components/MediaCard";
 import { useEffect, useState } from "react";
 import { TFile } from "../../types";
@@ -51,9 +51,15 @@ const Home = () => {
 
   return (
     <Box width="100%" padding={3}>
-      {loading ? (
-        <LoadingOverlay open={loading} />
-      ) : (
+      {loading && <LoadingOverlay open={loading} />}
+
+      {!loading && !files.length && (
+        <Box display="flex" justifyContent="center" marginTop={5}>
+          <Typography variant="h5">No Record Found!</Typography>
+        </Box>
+      )}
+
+      {!loading && files.length !== 0 && (
         <Grid2
           container
           spacing={{ xs: 4, md: 6 }}
